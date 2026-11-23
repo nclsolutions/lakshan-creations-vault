@@ -348,7 +348,7 @@
 
     <div class="summary">
       <div class="summary-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-      <div><div class="summary-title">Private by design</div><div class="summary-copy">Files are encrypted on this device. Removing an imported copy from Photos won't remove it from Haven.</div></div>
+      <div><div class="summary-title">Private by design</div><div class="summary-copy">Encrypted copies stay in this browser when you leave and reopen this link. Deleting the original from Photos won't remove the vault copy.</div></div>
     </div>
 
     <nav class="tabs" aria-label="Vault sections">
@@ -384,7 +384,7 @@
         <div class="settings-actions"><button class="primary-button" type="submit">Update password</button></div>
         <p id="passwordError" class="error-text" role="status"></p>
       </form>
-      <p class="footnote">Haven stores encrypted copies in this browser on this device. Keep a separate backup of important files. Clearing browser data or losing this device can permanently erase your vault.</p>
+      <p class="footnote">Haven stores encrypted copies only in this browser on this device and requests persistent storage where supported. Reopen this link in the same browser to see them again. Clearing browser or site data, using Private Browsing, or losing this device can permanently erase your vault. Keep a separate backup.</p>
     </section>
     <input id="filePicker" type="file" accept="image/*,video/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.rtf,.csv,.odt,.ods,.odp" multiple hidden>
   </div>
@@ -532,6 +532,15 @@
       toast.classList.remove("hidden");
       clearTimeout(toastTimer);
       toastTimer = setTimeout(() => toast.classList.add("hidden"), 3600);
+    }
+
+    async function requestStoragePersistence() {
+      const storage = navigator.storage;
+      if (!storage || typeof storage.persist !== "function") return;
+      const persisted = await storage.persist();
+      if (!persisted) {
+        notify("Your browser didn't enable extra storage protection. Keep this browser's site data to retain your vault.");
+      }
     }
 
     function categoryFor(file) {
@@ -815,6 +824,9 @@
         await unlock(loginPassword.value);
         $("#defaultPin").classList.add("hidden");
         showApp();
+        requestStoragePersistence().catch(error => {
+          notify(`Couldn't request storage protection: ${error.message || "unknown error"}`);
+        });
       } catch (error) {
         $("#loginError").textContent = error.message || "Couldn't unlock the vault.";
       }
