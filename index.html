@@ -74,7 +74,13 @@
       box-shadow: 0 8px 26px #b6f27c1c; transition: transform .16s, filter .16s;
     }
     .add-button:hover, .primary-button:hover { filter: brightness(1.06); transform: translateY(-1px); }
-    .add-button svg { width: 18px; height: 18px; }
+    .add-button svg { width: 20px; height: 20px; flex: 0 0 auto; animation: add-icon-spin 9s linear infinite; }
+    @keyframes add-icon-spin {
+      to { transform: rotate(360deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .add-button svg { animation: none; }
+    }
     .summary {
       display: flex; align-items: center; gap: 13px; min-height: 70px; padding: 14px 18px;
       border: 1px solid #334032; border-radius: 16px;
@@ -314,7 +320,17 @@
         <p class="hero-copy">A private place for the things you want to keep close and out of your camera roll.</p>
       </div>
       <button id="addButton" class="add-button" type="button">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <defs>
+            <linearGradient id="addIconFill" x1="5" y1="4" x2="18" y2="20" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#dfffad"/>
+              <stop offset="1" stop-color="#67c927"/>
+            </linearGradient>
+          </defs>
+          <circle cx="12" cy="12" r="10" fill="url(#addIconFill)" stroke="#398b17" stroke-width="1.3"/>
+          <path d="M12 6.8v10.4M6.8 12h10.4" stroke="#fff" stroke-width="2.3" stroke-linecap="round"/>
+          <circle cx="17.8" cy="6.4" r="1" fill="#f3ffd9"/>
+        </svg>
         Add files
       </button>
     </section>
