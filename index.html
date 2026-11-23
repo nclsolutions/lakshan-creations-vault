@@ -132,7 +132,8 @@
     .hidden { display: none !important; }
     .login-screen { display: grid; min-height: 100svh; place-items: center; padding: 24px 18px; background: radial-gradient(ellipse at 50% 12%, #314431 0, #151a16 48%, #0c0f0d 100%); }
     .login-card { width: min(100%, 390px); padding: 26px 30px 22px; border: 1px solid #39443b; border-radius: 27px; background: linear-gradient(155deg, #1d241e, #131714 72%); box-shadow: 0 28px 90px #0009, inset 0 1px #ffffff0a; text-align: center; }
-    .login-card .brand-mark { width: 48px; height: 48px; margin: 0 auto 10px; border-radius: 17px; }
+    .login-logo { width: 158px; margin: 0 auto 8px; }
+    .login-logo img { display: block; width: 100%; height: auto; }
     .login-brand { margin: 0 0 12px; color: var(--green); font-size: 10px; font-weight: 700; letter-spacing: 1.1px; }
     .lock-time { margin: 0 0 13px; color: var(--text); }
     .lock-time strong { display: block; font-size: 42px; font-weight: 520; letter-spacing: -1.7px; line-height: 1.05; font-variant-numeric: tabular-nums; }
@@ -198,7 +199,7 @@
     @media (max-height: 700px) {
       .login-screen { padding-top: 12px; padding-bottom: 12px; }
       .login-card { padding: 16px 24px 14px; }
-      .login-card .brand-mark { width: 40px; height: 40px; margin-bottom: 6px; }
+      .login-logo { width: 138px; margin-bottom: 6px; }
       .login-brand { margin-bottom: 7px; }
       .lock-time { margin-bottom: 8px; }
       .lock-time strong { font-size: 35px; }
@@ -215,9 +216,7 @@
 <body>
   <main id="loginScreen" class="login-screen">
     <form id="loginForm" class="login-card">
-      <div class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3.2 19 6v5.5c0 4.5-2.9 7.8-7 9.3-4.1-1.5-7-4.8-7-9.3V6l7-2.8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
+      <div class="login-logo"><img src="sefe-logo.png" alt="SEFE logo"></div>
       <div class="login-brand">LAKSHAN CREATIONS · 0779273876</div>
       <div class="lock-time" aria-live="off"><strong id="lockClock">--:--</strong><span id="lockDate"></span></div>
       <h1>Enter your PIN</h1>
