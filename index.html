@@ -25,7 +25,11 @@
       min-width: 320px;
       min-height: 100vh;
       margin: 0;
-      background: radial-gradient(ellipse at 50% -20%, #28382a 0, var(--bg) 45%);
+      background-color: var(--bg);
+      background-image: linear-gradient(rgba(7, 11, 12, .55), rgba(8, 11, 10, .67)), url("tech-background.jpg");
+      background-position: center;
+      background-size: cover;
+      background-attachment: fixed;
       color: var(--text);
     }
     button, input { font: inherit; }
@@ -130,7 +134,7 @@
     .primary-button { min-height: 42px; padding: 0 15px; font-size: 12px; }
     .footnote { margin-top: 16px; color: #849087; font-size: 11px; line-height: 1.55; }
     .hidden { display: none !important; }
-    .login-screen { display: grid; min-height: 100svh; place-items: center; padding: 24px 18px; background: radial-gradient(ellipse at 50% 12%, #314431 0, #151a16 48%, #0c0f0d 100%); }
+    .login-screen { display: grid; min-height: 100svh; place-items: center; padding: 24px 18px; background: linear-gradient(rgba(7, 11, 12, .43), rgba(8, 11, 10, .62)), url("tech-background.jpg") center / cover no-repeat; }
     .login-card { width: min(100%, 390px); padding: 26px 30px 22px; border: 1px solid #39443b; border-radius: 27px; background: linear-gradient(155deg, #1d241e, #131714 72%); box-shadow: 0 28px 90px #0009, inset 0 1px #ffffff0a; text-align: center; }
     .login-logo { width: 158px; margin: 0 auto 8px; }
     .login-logo img { display: block; width: 100%; height: auto; }
