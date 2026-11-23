@@ -131,7 +131,16 @@
     .primary-button { min-height: 42px; padding: 0 15px; font-size: 12px; }
     .footnote { margin-top: 16px; color: #849087; font-size: 11px; line-height: 1.55; }
     .hidden { display: none !important; }
-    .login-screen { display: grid; min-height: 100svh; place-items: center; padding: 24px 18px; background: linear-gradient(rgba(7, 11, 12, .43), rgba(8, 11, 10, .62)), url("tech-background.jpg") center / cover no-repeat; }
+    .login-screen { display: grid; min-height: 100svh; place-items: center; gap: 12px; padding: 24px 18px; background: linear-gradient(rgba(7, 11, 12, .43), rgba(8, 11, 10, .62)), url("tech-background.jpg") center / cover no-repeat; }
+    .youtube-player { width: min(100%, 390px); overflow: hidden; border: 1px solid #ffffff20; border-radius: 15px; background: #101714dc; box-shadow: 0 10px 28px #0005; }
+    .youtube-play { display: flex; width: 100%; min-height: 48px; align-items: center; gap: 11px; padding: 8px 13px; border: 0; background: transparent; color: var(--text); cursor: pointer; text-align: left; }
+    .youtube-play:hover { background: #ffffff0a; }
+    .youtube-play-mark { display: grid; width: 31px; height: 23px; flex: 0 0 auto; place-items: center; border-radius: 7px; background: #ff263b; color: white; }
+    .youtube-play-mark svg { width: 13px; height: 13px; margin-left: 2px; }
+    .youtube-copy { display: grid; gap: 2px; }
+    .youtube-copy strong { font-size: 11px; font-weight: 680; }
+    .youtube-copy small { color: var(--muted); font-size: 9px; }
+    .youtube-player iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
     .login-card { width: min(100%, 390px); padding: 26px 30px 22px; border: 1px solid #39443b; border-radius: 27px; background: linear-gradient(155deg, #1d241e, #131714 72%); box-shadow: 0 28px 90px #0009, inset 0 1px #ffffff0a; text-align: center; }
     .login-logo { width: 158px; margin: 0 auto 8px; }
     .login-logo img { display: block; width: 100%; height: auto; }
@@ -217,6 +226,12 @@
 </head>
 <body>
   <main id="loginScreen" class="login-screen">
+    <section id="youtubePlayer" class="youtube-player" aria-label="YouTube playlist">
+      <button id="playPlaylist" class="youtube-play" type="button">
+        <span class="youtube-play-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l10-6.5-10-6.5Z"/></svg></span>
+        <span class="youtube-copy"><strong>Play YouTube playlist</strong><small>Tap to watch before unlocking</small></span>
+      </button>
+    </section>
     <form id="loginForm" class="login-card">
       <div class="login-logo"><img src="sefe-logo.png" alt="SEFE logo"></div>
       <div class="login-brand">LAKSHAN CREATIONS · 0779273876</div>
@@ -620,7 +635,17 @@
       currentRecord = null;
     }
 
+    function stopPlaylist() {
+      const frame = $("#youtubePlayer iframe");
+      if (frame) {
+        frame.src = "about:blank";
+        frame.remove();
+      }
+      $("#playPlaylist").classList.remove("hidden");
+    }
+
     function showApp() {
+      stopPlaylist();
       loginScreen.classList.add("hidden");
       app.classList.remove("hidden");
       $("#loginError").textContent = "";
@@ -673,6 +698,17 @@
       renderPinIndicators();
       $("#loginError").textContent = "";
     }));
+
+    $("#playPlaylist").addEventListener("click", () => {
+      const frame = document.createElement("iframe");
+      frame.title = "YouTube playlist";
+      frame.src = "https://www.youtube-nocookie.com/embed/videoseries?list=RDS6i_Gw5iGcY&autoplay=1";
+      frame.allow = "autoplay; encrypted-media; picture-in-picture";
+      frame.referrerPolicy = "strict-origin-when-cross-origin";
+      frame.allowFullscreen = true;
+      $("#playPlaylist").classList.add("hidden");
+      $("#youtubePlayer").append(frame);
+    });
 
     loginForm.addEventListener("submit", async event => {
       event.preventDefault();
