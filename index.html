@@ -40,11 +40,8 @@
     .topbar-right { display: flex; align-items: center; gap: 12px; }
     .maker-credit { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 10px; white-space: nowrap; }
     .maker-credit img { display: block; width: 58px; height: 41px; border: 1px solid var(--line); border-radius: 7px; background: white; object-fit: cover; }
-    .brand-mark {
-      display: grid; width: 42px; height: 42px; place-items: center; border-radius: 15px;
-      color: #162014; background: var(--green); box-shadow: 0 7px 25px #b6f22826;
-    }
-    .brand-mark svg { width: 23px; height: 23px; }
+    .brand-logo { display: flex; width: 82px; height: 42px; flex: 0 0 auto; align-items: center; }
+    .brand-logo img { display: block; width: 100%; height: auto; object-fit: contain; }
     .brand-name { font-size: 19px; font-weight: 720; letter-spacing: -.5px; }
     .brand-sub { margin-top: 2px; color: var(--muted); font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; }
     .lock-button, .icon-button, .ghost-button {
@@ -192,7 +189,8 @@
     }
     @media (max-width: 370px) {
       .lock-button { width: 41px; padding: 0; font-size: 0; }
-      .brand-sub { font-size: 9px; }
+      .brand-logo { width: 64px; }
+      .brand-sub { font-size: 8px; letter-spacing: .7px; }
       .tab { gap: 5px; padding: 0 9px; font-size: 12px; }
       .login-screen { padding: 10px; }
       .login-card { padding: 19px 16px 16px; }
@@ -252,9 +250,7 @@
   <div id="app" class="shell hidden">
     <header class="topbar">
       <div class="brand">
-        <div class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3.2 19 6v5.5c0 4.5-2.9 7.8-7 9.3-4.1-1.5-7-4.8-7-9.3V6l7-2.8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
+        <div class="brand-logo"><img src="sefe-logo.png" alt="SEFE logo"></div>
         <div><div class="brand-name">LAKSHAN CREATIONS</div><div class="brand-sub">0779273876 · Your private vault</div></div>
       </div>
       <div class="topbar-right">
