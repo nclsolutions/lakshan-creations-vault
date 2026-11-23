@@ -709,10 +709,11 @@
       $("#loginError").textContent = "";
     }));
 
-    $("#playPlaylist").addEventListener("click", () => {
+    function startPlaylist() {
+      if ($("#youtubePlayer iframe")) return;
       const frame = document.createElement("iframe");
       frame.title = "YouTube playlist";
-      frame.src = "https://www.youtube-nocookie.com/embed/videoseries?list=RDS6i_Gw5iGcY&autoplay=1";
+      frame.src = "https://www.youtube-nocookie.com/embed/videoseries?list=RDS6i_Gw5iGcY&autoplay=1&mute=1&playsinline=1&controls=1";
       frame.allow = "autoplay; encrypted-media; picture-in-picture";
       frame.referrerPolicy = "strict-origin-when-cross-origin";
       frame.allowFullscreen = true;
@@ -720,8 +721,11 @@
       $("#playPlaylist").classList.add("hidden");
       $("#closePlaylist").classList.remove("hidden");
       $("#youtubePlayer").append(frame);
-    });
+    }
+
+    $("#playPlaylist").addEventListener("click", startPlaylist);
     $("#closePlaylist").addEventListener("click", stopPlaylist);
+    startPlaylist();
 
     loginForm.addEventListener("submit", async event => {
       event.preventDefault();
