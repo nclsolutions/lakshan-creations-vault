@@ -130,15 +130,32 @@
     .primary-button { min-height: 42px; padding: 0 15px; font-size: 12px; }
     .footnote { margin-top: 16px; color: #849087; font-size: 11px; line-height: 1.55; }
     .hidden { display: none !important; }
-    .login-screen { display: grid; min-height: 100svh; place-items: center; padding: 24px; }
-    .login-card { width: min(100%, 390px); padding: 30px; border: 1px solid var(--line); border-radius: 22px; background: #181d19; box-shadow: 0 24px 90px #0007; text-align: center; }
-    .login-card .brand-mark { width: 54px; height: 54px; margin: 0 auto 20px; border-radius: 18px; }
-    .login-brand { margin: -7px 0 17px; color: var(--green); font-size: 11px; font-weight: 700; letter-spacing: 1.15px; }
-    .login-card h1 { margin: 0 0 9px; font-size: 29px; }
-    .login-card > p { margin: 0 0 23px; color: var(--muted); font-size: 13px; line-height: 1.5; }
-    .login-card .field { height: 48px; margin: 0 0 13px; text-align: center; font-size: 19px; letter-spacing: 8px; }
-    .login-card .primary-button { width: 100%; height: 47px; font-size: 13px; }
-    .default-pin { margin-top: 16px; color: #a3afa5; font-size: 11px; }
+    .login-screen { display: grid; min-height: 100svh; place-items: center; padding: 24px 18px; background: radial-gradient(ellipse at 50% 12%, #314431 0, #151a16 48%, #0c0f0d 100%); }
+    .login-card { width: min(100%, 390px); padding: 26px 30px 22px; border: 1px solid #39443b; border-radius: 27px; background: linear-gradient(155deg, #1d241e, #131714 72%); box-shadow: 0 28px 90px #0009, inset 0 1px #ffffff0a; text-align: center; }
+    .login-card .brand-mark { width: 48px; height: 48px; margin: 0 auto 10px; border-radius: 17px; }
+    .login-brand { margin: 0 0 12px; color: var(--green); font-size: 10px; font-weight: 700; letter-spacing: 1.1px; }
+    .lock-time { margin: 0 0 13px; color: var(--text); }
+    .lock-time strong { display: block; font-size: 42px; font-weight: 520; letter-spacing: -1.7px; line-height: 1.05; font-variant-numeric: tabular-nums; }
+    .lock-time span { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; }
+    .login-card h1 { margin: 0 0 6px; font-size: 20px; letter-spacing: -.3px; }
+    .login-card > p { margin: 0 0 12px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .pin-display { position: relative; display: grid; min-height: 42px; place-items: center; margin: 14px auto 9px; cursor: text; }
+    .pin-indicators { display: flex; max-width: 100%; flex-wrap: wrap; justify-content: center; gap: 12px; padding: 4px; pointer-events: none; }
+    .pin-dot { width: 11px; height: 11px; border: 1px solid #718071; border-radius: 50%; background: #ffffff08; transition: background .12s, box-shadow .12s, border-color .12s; }
+    .pin-dot.filled { border-color: var(--green); background: var(--green); box-shadow: 0 0 10px #b6f27c75; }
+    .pin-input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: text; }
+    .pin-keypad { display: grid; grid-template-columns: repeat(3, 64px); justify-content: center; gap: 8px; margin: 10px auto 14px; }
+    .pin-key { display: grid; height: 49px; place-items: center; border: 1px solid #354037; border-radius: 15px; background: #202721; color: var(--text); cursor: pointer; transition: background .12s, transform .12s, border-color .12s; }
+    .pin-key:hover { border-color: #607253; background: #283329; }
+    .pin-key:active { transform: scale(.96); background: #30402f; }
+    .pin-key span { font-size: 19px; font-weight: 560; }
+    .pin-key.pin-key-action { color: #c1ccc2; font-size: 10px; }
+    .pin-key.pin-key-action span { font-size: 10px; }
+    .pin-key svg { width: 19px; height: 19px; }
+    .pin-key-spacer { visibility: hidden; }
+    .login-card .primary-button { width: 100%; height: 45px; font-size: 13px; }
+    .login-card .error-text { margin: 8px 0 0; }
+    .default-pin { margin-top: 11px; color: #a3afa5; font-size: 10px; }
     .default-pin strong { color: var(--green); letter-spacing: 1px; }
     .error-text { min-height: 17px; margin: 10px 0 0; color: var(--danger); font-size: 12px; }
     .toast { position: fixed; z-index: 20; right: 18px; bottom: max(18px, env(safe-area-inset-bottom)); max-width: min(420px, calc(100vw - 36px)); padding: 12px 15px; border: 1px solid #455344; border-radius: 12px; background: #1b251b; color: var(--text); box-shadow: 0 12px 35px #0008; font-size: 13px; }
@@ -165,12 +182,33 @@
       .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
       .preview { aspect-ratio: 1.1; }
       .form-grid { grid-template-columns: 1fr; gap: 12px; }
-      .login-card { padding: 25px 20px; }
+      .login-screen { padding: 16px 12px; }
+      .login-card { padding: 22px 20px 19px; }
     }
     @media (max-width: 370px) {
       .lock-button { width: 41px; padding: 0; font-size: 0; }
       .brand-sub { font-size: 9px; }
       .tab { gap: 5px; padding: 0 9px; font-size: 12px; }
+      .login-screen { padding: 10px; }
+      .login-card { padding: 19px 16px 16px; }
+      .pin-keypad { grid-template-columns: repeat(3, 60px); gap: 7px; margin: 8px auto 11px; }
+      .pin-key { height: 45px; border-radius: 13px; }
+      .lock-time strong { font-size: 38px; }
+    }
+    @media (max-height: 700px) {
+      .login-screen { padding-top: 12px; padding-bottom: 12px; }
+      .login-card { padding: 16px 24px 14px; }
+      .login-card .brand-mark { width: 40px; height: 40px; margin-bottom: 6px; }
+      .login-brand { margin-bottom: 7px; }
+      .lock-time { margin-bottom: 8px; }
+      .lock-time strong { font-size: 35px; }
+      .login-card h1 { font-size: 18px; }
+      .login-card > p { margin-bottom: 8px; }
+      .pin-display { min-height: 31px; margin: 8px auto 5px; }
+      .pin-keypad { gap: 6px; margin: 7px auto 10px; }
+      .pin-key { height: 39px; border-radius: 12px; }
+      .login-card .primary-button { height: 40px; }
+      .default-pin { margin-top: 7px; }
     }
   </style>
 </head>
@@ -181,9 +219,27 @@
         <svg viewBox="0 0 24 24" fill="none"><path d="M12 3.2 19 6v5.5c0 4.5-2.9 7.8-7 9.3-4.1-1.5-7-4.8-7-9.3V6l7-2.8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
       <div class="login-brand">LAKSHAN CREATIONS · 0779273876</div>
-      <h1>Your private space</h1>
-      <p>Your photos, videos and documents stay on this device, protected by your password.</p>
-      <input id="loginPassword" class="field" type="password" inputmode="numeric" autocomplete="current-password" maxlength="64" placeholder="••••" aria-label="Vault password" required>
+      <div class="lock-time" aria-live="off"><strong id="lockClock">--:--</strong><span id="lockDate"></span></div>
+      <h1>Enter your PIN</h1>
+      <p>Your private vault is locked. Enter your PIN to continue.</p>
+      <div class="pin-display">
+        <div id="pinIndicators" class="pin-indicators" aria-hidden="true"></div>
+        <input id="loginPassword" class="pin-input" type="password" inputmode="numeric" autocomplete="current-password" maxlength="64" aria-label="Vault PIN" required>
+      </div>
+      <div class="pin-keypad" aria-label="PIN keypad">
+        <button class="pin-key" type="button" data-digit="1" aria-label="1"><span>1</span></button>
+        <button class="pin-key" type="button" data-digit="2" aria-label="2"><span>2</span></button>
+        <button class="pin-key" type="button" data-digit="3" aria-label="3"><span>3</span></button>
+        <button class="pin-key" type="button" data-digit="4" aria-label="4"><span>4</span></button>
+        <button class="pin-key" type="button" data-digit="5" aria-label="5"><span>5</span></button>
+        <button class="pin-key" type="button" data-digit="6" aria-label="6"><span>6</span></button>
+        <button class="pin-key" type="button" data-digit="7" aria-label="7"><span>7</span></button>
+        <button class="pin-key" type="button" data-digit="8" aria-label="8"><span>8</span></button>
+        <button class="pin-key" type="button" data-digit="9" aria-label="9"><span>9</span></button>
+        <button class="pin-key pin-key-action" type="button" data-action="clear" aria-label="Clear PIN"><span>Clear</span></button>
+        <button class="pin-key" type="button" data-digit="0" aria-label="0"><span>0</span></button>
+        <button class="pin-key pin-key-action" type="button" data-action="delete" aria-label="Delete last digit"><svg viewBox="0 0 24 24" fill="none"><path d="M9 5H20a1.5 1.5 0 0 1 1.5 1.5v11A1.5 1.5 0 0 1 20 19H9l-6-7 6-7Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m12 9 5 5m0-5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+      </div>
       <button class="primary-button" type="submit">Unlock vault <span aria-hidden="true">→</span></button>
       <p id="loginError" class="error-text" role="status"></p>
       <div id="defaultPin" class="default-pin">First time here? Default password: <strong>2580</strong></div>
@@ -581,8 +637,43 @@
       loginScreen.classList.remove("hidden");
       $("#loginError").textContent = "";
       loginPassword.value = "";
-      loginPassword.focus();
+      renderPinIndicators();
+      document.querySelector('[data-digit="1"]').focus();
     }
+
+    function renderPinIndicators() {
+      const indicators = $("#pinIndicators");
+      const length = Math.max(4, loginPassword.value.length);
+      const dots = document.createDocumentFragment();
+      for (let index = 0; index < length; index++) {
+        const dot = document.createElement("span");
+        dot.className = `pin-dot${index < loginPassword.value.length ? " filled" : ""}`;
+        dots.append(dot);
+      }
+      indicators.replaceChildren(dots);
+    }
+
+    function updateLockClock() {
+      const now = new Date();
+      $("#lockClock").textContent = now.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+      $("#lockDate").textContent = now.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
+    }
+
+    updateLockClock();
+    setInterval(updateLockClock, 1000);
+    renderPinIndicators();
+    loginPassword.addEventListener("input", renderPinIndicators);
+    document.querySelectorAll(".pin-key").forEach(button => button.addEventListener("click", () => {
+      if (button.dataset.digit !== undefined && loginPassword.value.length < loginPassword.maxLength) {
+        loginPassword.value += button.dataset.digit;
+      } else if (button.dataset.action === "delete") {
+        loginPassword.value = loginPassword.value.slice(0, -1);
+      } else if (button.dataset.action === "clear") {
+        loginPassword.value = "";
+      }
+      renderPinIndicators();
+      $("#loginError").textContent = "";
+    }));
 
     loginForm.addEventListener("submit", async event => {
       event.preventDefault();
