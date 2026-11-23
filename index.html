@@ -136,6 +136,11 @@
       display: grid; min-height: 248px; place-items: center; padding: 32px; border: 1px dashed #39443b;
       border-radius: 17px; background: #171c1880; text-align: center;
     }
+    .empty.photo-empty {
+      border-style: solid; border-color: #ffffff35;
+      background-image: linear-gradient(rgba(7, 11, 12, .46), rgba(8, 11, 10, .58)), url("photos-empty-bg.jpg");
+      background-position: center; background-size: cover;
+    }
     .empty-symbol { display: grid; width: 54px; height: 54px; margin: 0 auto 13px; place-items: center; border-radius: 17px; background: #b6f21c12; color: var(--green); }
     .empty-symbol svg { width: 26px; height: 26px; }
     .empty-title { margin: 0 0 6px; font-size: 15px; font-weight: 700; }
@@ -598,6 +603,7 @@
       $("#sectionHeading").textContent = `Your ${activeTab.toLowerCase()}${activeTab === "Document" ? "s" : "s"}`;
       clearThumbnailUrls();
       fileGrid.replaceChildren();
+      emptyState.classList.toggle("photo-empty", activeTab === "Photo" && filtered.length === 0 && !searchInput.value.trim());
       emptyState.classList.toggle("hidden", filtered.length !== 0);
       fileGrid.classList.toggle("hidden", filtered.length === 0);
       if (!filtered.length) {
