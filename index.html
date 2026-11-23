@@ -141,6 +141,10 @@
     .youtube-copy strong { font-size: 11px; font-weight: 680; }
     .youtube-copy small { color: var(--muted); font-size: 9px; }
     .youtube-player iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+    .youtube-player.is-playing { position: fixed; z-index: 70; inset: 0; display: grid; width: 100vw; height: 100vh; height: 100dvh; max-width: none; place-items: center; border: 0; border-radius: 0; background: #000; box-shadow: none; }
+    .youtube-player.is-playing iframe { width: 100%; height: 100%; aspect-ratio: auto; }
+    .youtube-close { position: absolute; z-index: 1; top: max(12px, env(safe-area-inset-top)); left: max(12px, env(safe-area-inset-left)); display: inline-flex; min-height: 38px; align-items: center; gap: 7px; padding: 0 12px; border: 1px solid #ffffff35; border-radius: 999px; background: #111d; color: white; cursor: pointer; font-size: 11px; }
+    .youtube-close svg { width: 15px; height: 15px; }
     .login-card { width: min(100%, 390px); padding: 26px 30px 22px; border: 1px solid #39443b; border-radius: 27px; background: linear-gradient(155deg, #1d241e, #131714 72%); box-shadow: 0 28px 90px #0009, inset 0 1px #ffffff0a; text-align: center; }
     .login-logo { width: 158px; margin: 0 auto 8px; }
     .login-logo img { display: block; width: 100%; height: auto; }
@@ -230,6 +234,10 @@
       <button id="playPlaylist" class="youtube-play" type="button">
         <span class="youtube-play-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l10-6.5-10-6.5Z"/></svg></span>
         <span class="youtube-copy"><strong>Play YouTube playlist</strong><small>Tap to watch before unlocking</small></span>
+      </button>
+      <button id="closePlaylist" class="youtube-close hidden" type="button" aria-label="Close full-screen video">
+        <svg viewBox="0 0 24 24" fill="none"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Back to PIN
       </button>
     </section>
     <form id="loginForm" class="login-card">
@@ -641,6 +649,8 @@
         frame.src = "about:blank";
         frame.remove();
       }
+      $("#youtubePlayer").classList.remove("is-playing");
+      $("#closePlaylist").classList.add("hidden");
       $("#playPlaylist").classList.remove("hidden");
     }
 
@@ -706,9 +716,12 @@
       frame.allow = "autoplay; encrypted-media; picture-in-picture";
       frame.referrerPolicy = "strict-origin-when-cross-origin";
       frame.allowFullscreen = true;
+      $("#youtubePlayer").classList.add("is-playing");
       $("#playPlaylist").classList.add("hidden");
+      $("#closePlaylist").classList.remove("hidden");
       $("#youtubePlayer").append(frame);
     });
+    $("#closePlaylist").addEventListener("click", stopPlaylist);
 
     loginForm.addEventListener("submit", async event => {
       event.preventDefault();
@@ -767,7 +780,11 @@
     $("#lockButton").addEventListener("click", lockApp);
     $("#closeViewer").addEventListener("click", closeViewer);
     modal.addEventListener("click", event => { if (event.target === modal) closeViewer(); });
-    document.addEventListener("keydown", event => { if (event.key === "Escape" && !modal.classList.contains("hidden")) closeViewer(); });
+    document.addEventListener("keydown", event => {
+      if (event.key !== "Escape") return;
+      if (!modal.classList.contains("hidden")) closeViewer();
+      if ($("#youtubePlayer").classList.contains("is-playing")) stopPlaylist();
+    });
     $("#downloadButton").addEventListener("click", async () => {
       if (!currentRecord) return;
       try {
