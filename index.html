@@ -73,8 +73,9 @@
       color: #172012; background: var(--green); font-size: 14px; font-weight: 720;
       box-shadow: 0 8px 26px #b6f27c1c; transition: transform .16s, filter .16s;
     }
+    .add-button { padding: 0; color: var(--green); background: transparent; box-shadow: none; }
     .add-button:hover, .primary-button:hover { filter: brightness(1.06); transform: translateY(-1px); }
-    .add-button svg { width: 20px; height: 20px; flex: 0 0 auto; animation: add-icon-spin 9s linear infinite; }
+    .add-button svg { width: 34px; height: 34px; flex: 0 0 auto; animation: add-icon-spin 9s linear infinite; }
     @keyframes add-icon-spin {
       to { transform: rotate(360deg); }
     }
@@ -211,7 +212,7 @@
       .topbar-right { width: 100%; justify-content: flex-end; }
       .hero { align-items: flex-start; padding: 39px 0 22px; }
       .hero .add-button { width: 46px; height: 46px; flex: 0 0 auto; padding: 0; font-size: 0; }
-      .hero .add-button svg { width: 20px; height: 20px; }
+      .hero .add-button svg { width: 34px; height: 34px; }
       .summary { align-items: flex-start; }
       .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
       .preview { aspect-ratio: 1.1; }
@@ -319,7 +320,7 @@
         <h1>Keep it just<br>for your eyes.</h1>
         <p class="hero-copy">A private place for the things you want to keep close and out of your camera roll.</p>
       </div>
-      <button id="addButton" class="add-button" type="button">
+      <button id="addButton" class="add-button" type="button" aria-label="Add files to your vault">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <defs>
             <linearGradient id="addIconFill" x1="5" y1="4" x2="18" y2="20" gradientUnits="userSpaceOnUse">
